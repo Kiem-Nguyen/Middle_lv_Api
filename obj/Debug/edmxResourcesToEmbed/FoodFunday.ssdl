@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FoodFundayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'FoodFunday.dbo.AboutUs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AboutUs">
+    <Key>
+      <PropertyRef Name="title" />
+    </Key>
+    <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="summary" Type="nvarchar" MaxLength="200" />
+    <Property Name="decription" Type="nvarchar(max)" />
+    <Property Name="mainImage" Type="nvarchar" MaxLength="200" />
+    <Property Name="isSauce" Type="bit" />
+    <Property Name="sauceImage" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="text" />
+    <Property Name="icon" Type="text" />
+  </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="imageUrl" Type="text" />
+  </EntityType>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="idPro" />
+      <PropertyRef Name="idImg" />
+    </Key>
+    <Property Name="idPro" Type="int" Nullable="false" />
+    <Property Name="idImg" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+    <Property Name="Summary" Type="nvarchar" MaxLength="150" />
+    <Property Name="isSpecial" Type="bit" />
+    <Property Name="price" Type="float" />
+    <Property Name="categoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'FoodFunday.dbo.Teams' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Teams">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Summary" Type="nvarchar(max)" />
+    <Property Name="Avartar" Type="nvarchar" MaxLength="300" />
+    <Property Name="Achievements" Type="nvarchar(max)" />
+    <Property Name="linkFb" Type="nvarchar" MaxLength="300" />
+    <Property Name="linkTw" Type="nvarchar" MaxLength="300" />
+    <Property Name="linkIn" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar(max)" />
+    <Property Name="password" Type="varchar(max)" />
+    <Property Name="type" Type="int" />
+    <Property Name="firstname" Type="nvarchar" MaxLength="50" />
+    <Property Name="lastname" Type="nvarchar" MaxLength="50" />
+    <Property Name="avartar" Type="nchar" MaxLength="200" />
+    <Property Name="phone" Type="nchar" MaxLength="10" />
+    <Property Name="email" Type="nchar" MaxLength="50" />
+    <Property Name="dob" Type="date" />
+    <Property Name="sex" Type="bit" />
+    <Property Name="token" Type="varchar(max)" />
+    <Property Name="colorthame" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="typeId" />
+    </Key>
+    <Property Name="typeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <Association Name="FK_ProductImage_Images">
+    <End Role="Images" Type="Self.Images" Multiplicity="1" />
+    <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Images">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ProductImage">
+        <PropertyRef Name="idImg" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductImage_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ProductImage">
+        <PropertyRef Name="idPro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_UserType">
+    <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="typeId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FoodFundayModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AboutUs" EntityType="Self.AboutUs" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AboutUs].[title] AS [title], 
+    [AboutUs].[summary] AS [summary], 
+    [AboutUs].[decription] AS [decription], 
+    [AboutUs].[mainImage] AS [mainImage], 
+    [AboutUs].[isSauce] AS [isSauce], 
+    [AboutUs].[sauceImage] AS [sauceImage]
+    FROM [dbo].[AboutUs] AS [AboutUs]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Teams" EntityType="Self.Teams" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Teams].[id] AS [id], 
+    [Teams].[Name] AS [Name], 
+    [Teams].[Summary] AS [Summary], 
+    [Teams].[Avartar] AS [Avartar], 
+    [Teams].[Achievements] AS [Achievements], 
+    [Teams].[linkFb] AS [linkFb], 
+    [Teams].[linkTw] AS [linkTw], 
+    [Teams].[linkIn] AS [linkIn]
+    FROM [dbo].[Teams] AS [Teams]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_ProductImage_Images" Association="Self.FK_ProductImage_Images">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="ProductImage" EntitySet="ProductImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductImage_Products" Association="Self.FK_ProductImage_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductImage" EntitySet="ProductImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Category" Association="Self.FK_Products_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_UserType" Association="Self.FK_Users_UserType">
+      <End Role="UserType" EntitySet="UserType" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FoodFundayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="FoodFundayEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="FoodFundayModel.User" />
+    <EntitySet Name="sysdiagrams" EntityType="FoodFundayModel.sysdiagram" />
+    <EntitySet Name="UserTypes" EntityType="FoodFundayModel.UserType" />
+    <AssociationSet Name="FK_Users_UserType" Association="FoodFundayModel.FK_Users_UserType">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="AboutUs1" EntityType="FoodFundayModel.AboutUs" />
+    <EntitySet Name="Categories" EntityType="FoodFundayModel.Category" />
+    <EntitySet Name="Images" EntityType="FoodFundayModel.Image" />
+    <EntitySet Name="Products" EntityType="FoodFundayModel.Product" />
+    <AssociationSet Name="FK_Products_Category" Association="FoodFundayModel.FK_Products_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="ProductImage" Association="FoodFundayModel.ProductImage">
+      <End Role="Image" EntitySet="Images" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <EntitySet Name="Teams" EntityType="FoodFundayModel.Team" />
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="avartar" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="dob" Type="DateTime" Precision="0" />
+    <Property Name="sex" Type="Boolean" />
+    <Property Name="token" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="colorthame" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="Int32" />
+    <NavigationProperty Name="UserType" Relationship="FoodFundayModel.FK_Users_UserType" FromRole="User" ToRole="UserType" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="typeId" />
+    </Key>
+    <Property Name="typeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="FoodFundayModel.FK_Users_UserType" FromRole="UserType" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Users_UserType">
+    <End Type="FoodFundayModel.UserType" Role="UserType" Multiplicity="0..1" />
+    <End Type="FoodFundayModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="typeId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AboutUs">
+    <Key>
+      <PropertyRef Name="title" />
+    </Key>
+    <Property Name="title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="summary" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="decription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="mainImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="isSauce" Type="Boolean" />
+    <Property Name="sauceImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="icon" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="FoodFundayModel.FK_Products_Category" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="imageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="FoodFundayModel.ProductImage" FromRole="Image" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Summary" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="isSpecial" Type="Boolean" />
+    <Property Name="price" Type="Double" />
+    <Property Name="categoryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="FoodFundayModel.FK_Products_Category" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Images" Relationship="FoodFundayModel.ProductImage" FromRole="Product" ToRole="Image" />
+  </EntityType>
+  <Association Name="FK_Products_Category">
+    <End Type="FoodFundayModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="FoodFundayModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductImage">
+    <End Type="FoodFundayModel.Image" Role="Image" Multiplicity="*" />
+    <End Type="FoodFundayModel.Product" Role="Product" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Avartar" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Achievements" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="linkFb" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="linkTw" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="linkIn" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

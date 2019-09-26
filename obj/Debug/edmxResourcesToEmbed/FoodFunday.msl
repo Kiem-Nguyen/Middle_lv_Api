@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FoodFundayModelStoreContainer" CdmEntityContainer="FoodFundayEntities">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="FoodFundayModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="colorthame" ColumnName="colorthame" />
+          <ScalarProperty Name="token" ColumnName="token" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="avartar" ColumnName="avartar" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="FoodFundayModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypes">
+      <EntityTypeMapping TypeName="FoodFundayModel.UserType">
+        <MappingFragment StoreEntitySet="UserType">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AboutUs1">
+      <EntityTypeMapping TypeName="FoodFundayModel.AboutUs">
+        <MappingFragment StoreEntitySet="AboutUs">
+          <ScalarProperty Name="sauceImage" ColumnName="sauceImage" />
+          <ScalarProperty Name="isSauce" ColumnName="isSauce" />
+          <ScalarProperty Name="mainImage" ColumnName="mainImage" />
+          <ScalarProperty Name="decription" ColumnName="decription" />
+          <ScalarProperty Name="summary" ColumnName="summary" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="FoodFundayModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="FoodFundayModel.Image">
+        <MappingFragment StoreEntitySet="Images">
+          <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="FoodFundayModel.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="isSpecial" ColumnName="isSpecial" />
+          <ScalarProperty Name="Summary" ColumnName="Summary" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProductImage" TypeName="FoodFundayModel.ProductImage" StoreEntitySet="ProductImage">
+      <EndProperty Name="Product">
+        <ScalarProperty Name="id" ColumnName="idPro" />
+      </EndProperty>
+      <EndProperty Name="Image">
+        <ScalarProperty Name="id" ColumnName="idImg" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="FoodFundayModel.Team">
+        <MappingFragment StoreEntitySet="Teams">
+          <ScalarProperty Name="linkIn" ColumnName="linkIn" />
+          <ScalarProperty Name="linkTw" ColumnName="linkTw" />
+          <ScalarProperty Name="linkFb" ColumnName="linkFb" />
+          <ScalarProperty Name="Achievements" ColumnName="Achievements" />
+          <ScalarProperty Name="Avartar" ColumnName="Avartar" />
+          <ScalarProperty Name="Summary" ColumnName="Summary" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
